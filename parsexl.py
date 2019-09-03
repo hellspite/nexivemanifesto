@@ -96,3 +96,7 @@ def parse_xml(in_xl):
     file_out = create_empty_sheet()
 
     rows = count_rows(file_in)
+
+    # Numero d'ordine
+    for i in range(3,rows):
+        file_out['A'+str(i-1)] = file_in['A'+str(i)]
