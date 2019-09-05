@@ -10,17 +10,19 @@ OUTPUT False se il file è sconosciuto oppure restituisce il foglio di calcolo
 def load_excel(file_name):
     try:
         wb = openpyxl.load_workbook(file_name)
-    except:
+    except FileNotFoundError:
         print("File non trovato")
         return False
 
     sheet_num = int(input("Seleziona il numero del foglio di calcolo: "))
 
+    ws = None
     while ws is None:
-        try:
-            ws = wb.active(sheet_num - 1)
-        except:
-            print("Numero di foglio inesistente")
+        wb.active = (sheet_num - 1)
+        if wb.active is None:
+            print("Foglio di calcolo inesistente, provare di nuovo")
+
+        ws = wb.active
 
     return ws
 
