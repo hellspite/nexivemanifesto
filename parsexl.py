@@ -126,7 +126,13 @@ def parse_xml(in_xl):
 
     # CAP
     for i in range(3, rows):
-        file_out['G' + str(i - 1)] = file_in['I' + str(i)]
+        cap = str(file_in['I' + str(i)])
+        cap_len = len(cap)
+        if cap_len < 5:
+            for c in range(cap_len, 5):
+                cap = '0'+cap
+
+        file_out['G' + str(i - 1)] = cap
 
     # Provincia
     for i in range(3, rows):
