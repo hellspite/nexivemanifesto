@@ -103,3 +103,39 @@ def parse_xml(in_xl):
     # Numero d'ordine
     for i in range(3, rows):
         file_out['A' + str(i - 1)] = file_in['A' + str(i)]
+
+    # Email
+    for i in range(3, rows):
+        file_out['Q' + str(i - 1)] = file_in['D' + str(i)]
+
+    # Nome
+    for i in range(3, rows):
+        file_out['B' + str(i - 1)] = file_in['E' + str(i)]
+
+    # Indirizzo
+    for i in range(3, rows):
+        file_out['E' + str(i - 1)] = file_in['F' + str(i)]
+
+    # Presso
+    for i in range(3, rows):
+        file_out['C' + str(i - 1)] = file_in['G' + str(i)]
+
+    # Città
+    for i in range(3, rows):
+        file_out['I' + str(i - 1)] = file_in['H' + str(i)]
+
+    # CAP
+    for i in range(3, rows):
+        file_out['G' + str(i - 1)] = file_in['I' + str(i)]
+
+    # Provincia
+    for i in range(3, rows):
+        file_out['J' + str(i - 1)] = file_in['J' + str(i)]
+
+    # Telefono
+    for i in range(3, rows):
+        file_out['P' + str(i - 1)] = file_in['K' + str(i)]
+
+    # Taglia
+    for i in range(2, rows):
+        file_out['N' + str(i - 1)] = 'S'
