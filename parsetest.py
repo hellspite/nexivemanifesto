@@ -34,6 +34,23 @@ class ParsexlTestCase(unittest.TestCase):
 
         self.assertEqual(rows, 11)
 
+    def test_parse_shirts(self):
+        quantity = 3
+        content = "Maglietta io rompo black - Femmina / M"
+
+        shirt = parsexl.parse_content(quantity, content)
+
+        self.assertEqual(shirt, 'B - F / M   B - F / M   B - F / M')
+
+    def test_parse_one_shirt(self):
+        quantity = 1
+        content = "Maglietta io rompo orange - Maschio / M"
+
+        shirt = parsexl.parse_content(quantity, content)
+
+        self.assertEqual(shirt, 'O - M / M')
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -86,12 +86,29 @@ def count_rows(worksheet):
     return row_num
 
 
+def parse_content(quantity, content):
+
+    content = content.lower()
+    content = content.replace('maglietta io rompo black', 'B')
+    content = content.replace('maglietta io rompo orange', 'O')
+    content = content.replace('femmina', 'F')
+    content = content.replace('maschio', 'M')
+    content = content.upper()
+
+    if quantity > 1:
+        content = content + "   "
+        content = content * quantity
+        content = content.rstrip()
+
+    return content
+
+
 """
 Funzione per passare i dati dal primo foglio excel a quello definitivo per la spedizione Nexive
 """
 
 
-def parse_xml(in_xl):
+def parse_xl(in_xl):
     # Carico il file in entrata
     file_in = load_excel(in_xl)
 
@@ -145,3 +162,12 @@ def parse_xml(in_xl):
     # Taglia
     for i in range(2, rows):
         file_out['N' + str(i - 1)] = 'S'
+
+    # Contenuto
+    for i in range(3, rows):
+        quantity = file_in['B' + str(i)]
+        shirt = file_in['C' + str(i)]
+
+        shirt = parse_content(quantity, shirt)
+
+        file_out['D' + str(i - 1)] = shirt
