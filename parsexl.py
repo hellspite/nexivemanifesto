@@ -66,7 +66,7 @@ def create_empty_sheet():
     ws['AA1'] = "PRODOTTO"
     ws['AB1'] = "SERVIZIO_RESI_EASY"
 
-    return ws
+    return wb
 
 
 """
@@ -84,6 +84,11 @@ def count_rows(worksheet):
             row_num += 1
 
     return row_num
+
+
+"""
+Funzione che si occupa dell'elaborazione del contenuto
+"""
 
 
 def parse_content(quantity, content):
@@ -113,7 +118,8 @@ def parse_xl(in_xl):
     file_in = load_excel(in_xl)
 
     # Creo il file in uscita
-    file_out = create_empty_sheet()
+    workbook_out = create_empty_sheet()
+    file_out = workbook_out.active
 
     rows = count_rows(file_in)
 
