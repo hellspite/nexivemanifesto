@@ -1,6 +1,5 @@
 import openpyxl
 
-
 """
 Funzione per il caricamento del file excel e la selezione del foglio di calcolo
 INPUT nome del file
@@ -9,7 +8,6 @@ OUTPUT False se il file è sconosciuto oppure restituisce il foglio di calcolo
 
 
 def load_excel(file_name):
-
     try:
         wb = openpyxl.load_workbook(file_name)
     except:
@@ -20,11 +18,12 @@ def load_excel(file_name):
 
     while ws is None:
         try:
-            ws = wb.active(sheet_num-1)
+            ws = wb.active(sheet_num - 1)
         except:
             print("Numero di foglio inesistente")
 
     return ws
+
 
 """
 Funzione per creare un nuovo foglio excel che verrà poi caricato sul sito Nexive
@@ -67,6 +66,7 @@ def create_empty_sheet():
 
     return ws
 
+
 """
 Funzione per contare le righe effettive da processare
 """
@@ -83,6 +83,7 @@ def count_rows(worksheet):
 
     return row_num
 
+
 """
 Funzione per passare i dati dal primo foglio excel a quello definitivo per la spedizione Nexive
 """
@@ -98,5 +99,5 @@ def parse_xml(in_xl):
     rows = count_rows(file_in)
 
     # Numero d'ordine
-    for i in range(3,rows):
-        file_out['A'+str(i-1)] = file_in['A'+str(i)]
+    for i in range(3, rows):
+        file_out['A' + str(i - 1)] = file_in['A' + str(i)]
