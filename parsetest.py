@@ -21,7 +21,8 @@ class ParsexlTestCase(unittest.TestCase):
         self.assertIsNone(wb_fail)
 
     def test_create_empty_sheet(self):
-        ws = parsexl.create_empty_sheet()
+        wb = parsexl.create_empty_sheet()
+        ws = wb.active
 
         self.assertEqual(ws['A1'].value, 'TITOLO')
 

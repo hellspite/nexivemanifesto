@@ -14,6 +14,15 @@ def load_excel(file_name):
         print("File non trovato")
         return False
 
+    return wb
+
+
+"""
+Funzione per selezionare il foglio di calcolo dal documento excel
+"""
+
+
+def select_sheet(wb):
     sheet_num = int(input("Seleziona il numero del foglio di calcolo: "))
 
     ws = None
@@ -21,8 +30,6 @@ def load_excel(file_name):
         wb.active = (sheet_num - 1)
         if wb.active is None:
             print("Foglio di calcolo inesistente, provare di nuovo")
-
-        ws = wb.active
 
     return ws
 
@@ -113,13 +120,10 @@ Funzione per passare i dati dal primo foglio excel a quello definitivo per la sp
 """
 
 
-def parse_xl(in_xl):
-    # Carico il file in entrata
-    file_in = load_excel(in_xl)
+def parse_xl(ws_in, wb_out):
 
-    # Creo il file in uscita
-    workbook_out = create_empty_sheet()
-    file_out = workbook_out.active
+    file_in = ws_in
+    file_out = wb_out.active
 
     rows = count_rows(file_in)
 
@@ -177,3 +181,10 @@ def parse_xl(in_xl):
         shirt = parse_content(quantity, shirt)
 
         file_out['D' + str(i - 1)] = shirt
+
+    return wb_out
+
+
+"""
+Funzione per salvare il file excel finale
+"""
