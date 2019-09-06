@@ -23,10 +23,9 @@ Funzione per selezionare il foglio di calcolo dal documento excel
 
 
 def select_sheet(wb):
-    sheet_num = int(input("Seleziona il numero del foglio di calcolo: "))
-
     ws = None
     while ws is None:
+        sheet_num = int(input("Seleziona il numero del foglio di calcolo: "))
         wb.active = (sheet_num - 1)
         if wb.active is None:
             print("Foglio di calcolo inesistente, provare di nuovo")
