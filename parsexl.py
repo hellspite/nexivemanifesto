@@ -129,7 +129,7 @@ def parse_xl(ws_in, wb_out):
     file_in = ws_in
     file_out = wb_out.active
 
-    rows = count_rows(file_in)
+    rows = count_rows(file_in) + 1
 
     # Numero d'ordine
     for i in range(3, rows):
@@ -157,11 +157,16 @@ def parse_xl(ws_in, wb_out):
 
     # CAP
     for i in range(3, rows):
-        cap = str(file_in['I' + str(i)].value)
-        cap_len = len(cap)
-        if cap_len < 5:
-            for c in range(cap_len, 5):
-                cap = '0'+cap
+        cap = file_in['I' + str(i)].value
+        if cap is not None:
+            cap = int(cap)
+            cap = str(cap)
+            cap_len = len(cap)
+            if cap_len < 5:
+                for c in range(cap_len, 5):
+                    cap = '0'+cap
+        else:
+            cap = None
 
         file_out['G' + str(i - 1)] = cap
 
