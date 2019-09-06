@@ -30,7 +30,8 @@ def select_sheet(wb):
         if wb.active is None:
             print("Foglio di calcolo inesistente, provare di nuovo")
         else:
-            ws = wb.active
+            if check_sheet(ws):
+                ws = wb.active
 
     print('Foglio selezionato: ' + ws.title)
 
@@ -102,7 +103,6 @@ Funzione che si occupa dell'elaborazione del contenuto
 
 
 def parse_content(quantity, content):
-
     content = content.lower()
     content = content.replace('maglietta io rompo black', 'B')
     content = content.replace('maglietta io rompo orange', 'O')
@@ -124,7 +124,6 @@ Funzione per passare i dati dal primo foglio excel a quello definitivo per la sp
 
 
 def parse_xl(ws_in, wb_out):
-
     file_in = ws_in
     file_out = wb_out.active
 
@@ -163,7 +162,7 @@ def parse_xl(ws_in, wb_out):
             cap_len = len(cap)
             if cap_len < 5:
                 for c in range(cap_len, 5):
-                    cap = '0'+cap
+                    cap = '0' + cap
         else:
             cap = None
 
@@ -208,7 +207,7 @@ def check_rows(wb):
     double_list = []
     for i, row in enumerate(ws.iter_rows(min_row=2, max_row=rows, min_col=1, max_col=4)):
         if row[0].value == prev_order:
-            double_list.append((i-1, i))
+            double_list.append((i - 1, i))
 
         prev_order = row[0].value
 
@@ -229,3 +228,18 @@ def check_rows(wb):
             counter += 1
 
     return wb
+
+
+"""
+Funzione per verificare validità foglio di calcolo
+"""
+
+
+def check_sheet(sheet):
+    if sheet is None:
+        return False
+
+    if sheet.title[:6].lower() == 'ordini':
+        return True
+    else:
+        return False
