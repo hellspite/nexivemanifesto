@@ -21,6 +21,8 @@ if __name__ == "__main__":
 
         wb_nexive = parsexl.parse_xl(ws_in, wb_out)
 
+        wb_nexive = parsexl.check_rows(wb_nexive)
+
         wb_nexive.save('nexive.xlsx')
 
         break

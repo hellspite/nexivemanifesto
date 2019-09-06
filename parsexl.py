@@ -195,5 +195,38 @@ def parse_xl(ws_in, wb_out):
 
 
 """
-Funzione per salvare il file excel finale
+Funzione per verificare ordine su righe multiple
 """
+
+
+def check_rows(wb):
+    wb = wb
+    ws = wb.active
+
+    rows = count_rows(ws)
+
+    prev_order = 0
+    double_list = []
+    for i, row in enumerate(ws.iter_rows(min_row=2, max_row=rows, min_col=1, max_col=4)):
+        if row[0].value == prev_order:
+            double_list.append((i-1, i))
+
+        prev_order = row[0].value
+
+    if len(double_list) > 0:
+        to_delete = []
+        for o, d in double_list:
+            o_index = o + 2
+            d_index = d + 2
+
+            ws['D' + str(o_index)] = ws['D' + str(o_index)].value + '   ' + ws['D' + str(d_index)].value
+
+            to_delete.append(d_index)
+
+        counter = 0
+        for d in to_delete:
+            ws.delete_rows(d - counter)
+
+            counter += 1
+
+    return wb
