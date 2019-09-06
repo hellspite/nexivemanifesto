@@ -6,14 +6,17 @@ Il programma principale
 
 if __name__ == "__main__":
     while True:
-        file_name = None
-        while file_name is None:
-            try:
-                file_name = input('Nome del file excel: ')
-            except FileNotFoundError:
-                print("File non trovato, riprovare")
+        ok_go = False
+        while ok_go is False:
+            file_name = input('Nome del file excel: ')
 
-        wb_in = parsexl.load_excel(file_name)
+            try:
+                wb_in = parsexl.load_excel(file_name)
+            except:
+                print("File non valido, riprovare")
+            else:
+                if wb_in is not False:
+                    ok_go = True
 
         wb_out = parsexl.create_empty_sheet()
 
