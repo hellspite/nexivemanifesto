@@ -30,6 +30,10 @@ def select_sheet(wb):
         wb.active = (sheet_num - 1)
         if wb.active is None:
             print("Foglio di calcolo inesistente, provare di nuovo")
+        else:
+            ws = wb.active
+
+    print('Foglio selezionato: ' + ws.title)
 
     return ws
 
@@ -129,31 +133,31 @@ def parse_xl(ws_in, wb_out):
 
     # Numero d'ordine
     for i in range(3, rows):
-        file_out['A' + str(i - 1)] = file_in['A' + str(i)]
+        file_out['A' + str(i - 1)] = file_in['A' + str(i)].value
 
     # Email
     for i in range(3, rows):
-        file_out['Q' + str(i - 1)] = file_in['D' + str(i)]
+        file_out['Q' + str(i - 1)] = file_in['D' + str(i)].value
 
     # Nome
     for i in range(3, rows):
-        file_out['B' + str(i - 1)] = file_in['E' + str(i)]
+        file_out['B' + str(i - 1)] = file_in['E' + str(i)].value
 
     # Indirizzo
     for i in range(3, rows):
-        file_out['E' + str(i - 1)] = file_in['F' + str(i)]
+        file_out['E' + str(i - 1)] = file_in['F' + str(i)].value
 
     # Presso
     for i in range(3, rows):
-        file_out['C' + str(i - 1)] = file_in['G' + str(i)]
+        file_out['C' + str(i - 1)] = file_in['G' + str(i)].value
 
     # Città
     for i in range(3, rows):
-        file_out['I' + str(i - 1)] = file_in['H' + str(i)]
+        file_out['I' + str(i - 1)] = file_in['H' + str(i)].value
 
     # CAP
     for i in range(3, rows):
-        cap = str(file_in['I' + str(i)])
+        cap = str(file_in['I' + str(i)].value)
         cap_len = len(cap)
         if cap_len < 5:
             for c in range(cap_len, 5):
@@ -163,20 +167,20 @@ def parse_xl(ws_in, wb_out):
 
     # Provincia
     for i in range(3, rows):
-        file_out['J' + str(i - 1)] = file_in['J' + str(i)]
+        file_out['J' + str(i - 1)] = file_in['J' + str(i)].value
 
     # Telefono
     for i in range(3, rows):
-        file_out['P' + str(i - 1)] = file_in['K' + str(i)]
+        file_out['P' + str(i - 1)] = file_in['K' + str(i)].value
 
     # Taglia
-    for i in range(2, rows):
+    for i in range(3, rows):
         file_out['N' + str(i - 1)] = 'S'
 
     # Contenuto
     for i in range(3, rows):
-        quantity = file_in['B' + str(i)]
-        shirt = file_in['C' + str(i)]
+        quantity = int(file_in['B' + str(i)].value)
+        shirt = file_in['C' + str(i)].value
 
         shirt = parse_content(quantity, shirt)
 
