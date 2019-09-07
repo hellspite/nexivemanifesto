@@ -27,11 +27,13 @@ def select_sheet(wb):
     while ws is None:
         sheet_num = int(input("Seleziona il numero del foglio di calcolo: "))
         wb.active = (sheet_num - 1)
-        if wb.active is None:
+        ws = wb.active
+        if ws is None:
             print("Foglio di calcolo inesistente, provare di nuovo")
         else:
-            if check_sheet(ws):
-                ws = wb.active
+            if check_sheet(ws) is False:
+                ws = None
+                print("Foglio di calcolo non valido, provare di nuovo")
 
     print('Foglio selezionato: ' + ws.title)
 
