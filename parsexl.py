@@ -239,7 +239,7 @@ Funzione per verificare validità foglio di calcolo
 
 def check_sheet(sheet):
     if sheet is None:
-       return False
+        return False
 
     if sheet.title[:6].lower() == 'ordini':
         return True
