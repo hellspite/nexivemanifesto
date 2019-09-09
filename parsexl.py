@@ -34,8 +34,13 @@ def select_sheet(wb):
             if check_sheet(ws) is False:
                 ws = None
                 print("Foglio di calcolo non valido, provare di nuovo")
-
-    print('Foglio selezionato: ' + ws.title)
+            else:
+                correct = None
+                while correct != 's' and correct != 'n':
+                    correct = input('Hai selezionato il foglio: ' + ws.title + ' è corretto? (s/n) ')
+                    correct.lower()
+                if correct == 'n':
+                    ws = None
 
     return ws
 
