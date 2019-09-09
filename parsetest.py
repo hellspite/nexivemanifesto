@@ -51,6 +51,33 @@ class ParsexlTestCase(unittest.TestCase):
 
         self.assertEqual(shirt, 'O - M / M')
 
+    # TODO Scrivere test per il parse del contenuto
+
+    # TODO Scrivere test per il check di ordini su righe multiple
+
+    def test_check_sheet_none(self):
+        result = parsexl.check_sheet(None)
+
+        self.assertEqual(result, False)
+
+    def test_check_sheet_correct(self):
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = 'Ordini'
+
+        result = parsexl.check_sheet(ws)
+
+        self.assertEqual(result, True)
+
+    def test_check_sheet_false(self):
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = 'Magazzino'
+
+        result = parsexl.check_sheet(ws)
+
+        self.assertEqual(result, False)
+
 
 
 if __name__ == '__main__':
