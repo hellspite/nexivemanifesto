@@ -32,8 +32,9 @@ def select_sheet(wb):
             print("Foglio di calcolo inesistente, provare di nuovo")
         else:
             if check_sheet(ws) is False:
-                ws = None
+                print(f'Hai selezionato il foglio: {ws.title}')
                 print("Foglio di calcolo non valido, provare di nuovo")
+                ws = None
             else:
                 correct = None
                 while correct != 's' and correct != 'n':
@@ -247,6 +248,8 @@ def check_sheet(sheet):
         return False
 
     if sheet.title[:6].lower() == 'ordini':
+        return True
+    elif sheet.title[:6].lower() == 'ordine':
         return True
     else:
         return False
